@@ -14,7 +14,7 @@ public class ResetPasswordCommand
         String password = words.get(1);
         String confirmPassword = words.get(2);
 
-        String response = PersonDAO.login(username, password);
+        String response = PersonDAO.resetPassword(username,password,confirmPassword);
 
         try
         {

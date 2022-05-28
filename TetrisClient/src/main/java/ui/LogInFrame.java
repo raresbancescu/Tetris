@@ -31,7 +31,7 @@ public class LogInFrame extends JFrame
             String username = usernameField.getText();
             String password = String.valueOf(passwordField.getPassword());
 
-            String request = "register " + username + " " + password;
+            String request = "login " + username + " " + password;
             Client.send(request);
             String response = Client.receive();
 

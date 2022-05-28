@@ -24,7 +24,7 @@ public class DeleteAccountFrame extends JFrame
 
         confirmButton.addActionListener(e ->
         {
-            String request = "delete " + Client.getUsername() + " " + Arrays.toString(passwordField.getPassword());
+            String request = "delete " + Client.getUsername() + " " + String.valueOf(passwordField.getPassword());
             Client.send(request);
             String response = Client.receive();
 

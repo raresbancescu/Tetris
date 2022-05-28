@@ -23,12 +23,12 @@ public class ResetPasswordFrame extends JFrame
 
         confirmButton.addActionListener(e ->
         {
-            String password = Arrays.toString(passwordField.getPassword());
-            String confirmPassword = Arrays.toString(confirmPasswordField.getPassword());
+            String password = String.valueOf(passwordField.getPassword());
+            String confirmPassword = String.valueOf(confirmPasswordField.getPassword());
             String request = "resetpassword " + Client.getUsername() + " " + password + " " + confirmPassword;
             Client.send(request);
             String response = Client.receive();
-
+            System.out.println(response);
             if(response.equals("Ok"))
             {
                 UIUtil.switchFrames(this, new LogInFrame("Tetris"));
