@@ -134,6 +134,24 @@ public class PersonDAO
         return response;
     }
 
+
+    public static String getPoints(String username)
+    {
+        String response = "";
+        try {
+            CallableStatement stmt;
+            stmt = connection.prepareCall("{?=call getHighScore(?)}");
+            stmt.setString(2, username);
+
+            stmt.registerOutParameter(1, Types.VARCHAR);
+            stmt.execute();
+            response = stmt.getString(1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
     /**
      * Method used to write the top players in a file
      * @return

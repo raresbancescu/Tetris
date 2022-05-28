@@ -1,5 +1,9 @@
 package Tetris;
 
+import client.Client;
+import ui.AccountFrame;
+import ui.util.UIUtil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,10 +22,10 @@ public class Board extends JPanel implements ActionListener {
     private Timer time;
     private Boolean fallingPiece = false;
     private Boolean started = false;
-    private Integer score = 0;
+    public static Integer score = 0;
     private Integer currentX = 0;
     private Integer currentY = 0;
-
+    private JLabel printScore=new JLabel("0");
 
     // shapes
     private Shape currentPiece;
@@ -32,6 +36,7 @@ public class Board extends JPanel implements ActionListener {
         setFocusable(true);
         currentPiece = new Shape();
         boardPieces = new Shape.Piece[100000];
+       printScore=tetris.getScore();
         time = new Timer(300, this);
         addKeyListener();
         clearBoard();
@@ -69,6 +74,7 @@ public class Board extends JPanel implements ActionListener {
                 {
                     dropFull();
                 }
+
             }
 
             @Override
@@ -115,8 +121,10 @@ public class Board extends JPanel implements ActionListener {
 
 
         if (fallingPiece) {
+
             fallingPiece = false;
             newPiece();
+
         } else {
             dropSlow();
         }
@@ -131,7 +139,13 @@ public class Board extends JPanel implements ActionListener {
             currentPiece.setShape(Shape.Piece.defaultPiece);
             started = false;
             System.out.println("game over");
-            exit(101) ;
+            //send the points to the server
+            String request = "points " + Client.getUsername() + " " + score;
+            Client.send(request);
+            Client.receive();
+            String response= Client.receive();
+            score=0;
+
 
         }
     }
@@ -190,6 +204,7 @@ public class Board extends JPanel implements ActionListener {
         currentPiece = newPiece;
         currentX = nX;
         currentY = nY;
+
         repaint();
         return true;
     }
@@ -217,7 +232,8 @@ public class Board extends JPanel implements ActionListener {
             }
 
             if (numberOfLines > 0) {
-                score += numberOfLines;
+                score += numberOfLines*100;
+                printScore.setText("Score : " + String.valueOf(score));
                 fallingPiece = true;
                 currentPiece.setShape(Shape.Piece.defaultPiece);
                 repaint();

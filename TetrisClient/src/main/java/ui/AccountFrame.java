@@ -1,6 +1,7 @@
 package ui;
 
 import Tetris.Tetris;
+import client.Client;
 import ui.util.UIUtil;
 
 import javax.swing.*;
@@ -23,7 +24,11 @@ public class AccountFrame extends JFrame
         play.addActionListener(e ->
         {
             // TODO switch to the tetris frame
-            Tetris tetris=new Tetris();
+            String request = "getpoints " + Client.getUsername();
+            Client.send(request);
+            String response = Client.receive();
+            System.out.println("puncte: " + response);
+            Tetris tetris=new Tetris(response);
             tetris.setVisible(true);
             this.setVisible(false);
         });

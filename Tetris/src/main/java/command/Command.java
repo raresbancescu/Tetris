@@ -15,6 +15,7 @@ public class Command
     private final static String RESET_PASSWORD = "RESETPASSWORD";
     private final static String DELETE = "DELETE";
     private final static String POINTS = "POINTS";
+    private final static String GETPOINTS= "GETPOINTS";
 
     public static String parse(String request)
     {
@@ -31,6 +32,7 @@ public class Command
                     case RESET_PASSWORD -> ResetPasswordCommand.parseResetPassword(words);
                     case DELETE -> DeleteCommand.parseDelete(words);
                     case POINTS -> PointsCommand.parsePoints(words);
+                    case GETPOINTS -> GetHighScoreCommand.parseHigh(words);
                     default -> UNKNOWN_REQUEST;
                 };
     }
