@@ -1,5 +1,6 @@
 package ui;
 
+import Tetris.Tetris;
 import ui.util.UIUtil;
 
 import javax.swing.*;
@@ -22,6 +23,9 @@ public class AccountFrame extends JFrame
         play.addActionListener(e ->
         {
             // TODO switch to the tetris frame
+            Tetris tetris=new Tetris();
+            tetris.setVisible(true);
+            this.setVisible(false);
         });
 
         resetPassword.addActionListener(e ->
