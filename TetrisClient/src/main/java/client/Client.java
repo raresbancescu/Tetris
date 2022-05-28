@@ -1,3 +1,5 @@
+package client;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,10 +12,11 @@ public class Client
     private static final String LOCALHOST = "127.0.0.1";
     private static final int PORT = 7002;
     private static Socket socket = null;
+    private static String username;
 
-    static PrintWriter out;
-    static BufferedReader in;
-    static BufferedReader reader;
+    private static PrintWriter out;
+    private static BufferedReader in;
+    private static BufferedReader reader;
 
     private Client()
     {
@@ -51,6 +54,16 @@ public class Client
         }
 
         return response;
+    }
+
+    public static String getUsername()
+    {
+        return username;
+    }
+
+    public static void setUsername(String username)
+    {
+        Client.username = username;
     }
 }
 

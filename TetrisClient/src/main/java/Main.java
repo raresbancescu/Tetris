@@ -1,3 +1,6 @@
+import client.Client;
+import ui.RegisterFrame;
+
 import javax.swing.*;
 
 public class Main
