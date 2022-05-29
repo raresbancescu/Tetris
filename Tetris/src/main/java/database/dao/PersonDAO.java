@@ -160,11 +160,13 @@ public class PersonDAO
     {
         String response = "";
         try {
+            response = "The top was written in the top file";
+            File file = new File("D:\\facultate\\Anul 2\\Semestrul 2\\PA\\project\\Tetris\\src\\main\\java\\database\\dao\\top.txt");
+
             CallableStatement stmt;
             stmt = connection.prepareCall("{call tetris_points.top()}");
             stmt.execute();
-            response = "The top was written in the top file";
-            File file = new File("top.txt");
+
             Desktop desktop = Desktop.getDesktop();
             desktop.open(file);
         } catch (Exception e) {

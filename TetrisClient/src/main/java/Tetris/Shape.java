@@ -1,24 +1,27 @@
 package Tetris;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Shape {
 
     enum Piece {
-        defaultPiece(new Integer[][]{{0, 0}, {0, 0}, {0, 0}, {0, 0}}),
-        zPiece(new Integer[][]{{0, -1}, {0, 0}, {-1, 0}, {-1, 1}}),
-        linePiece(new Integer[][]{{0, -1}, {0, 0}, {0, 1}, {0, 2}}),
-        tPiece(new Integer[][]{{-1, 0}, {0, 0}, {1, 0}, {0, 1}}),
-        squarePiece(new Integer[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}}),
-        lPiece(new Integer[][]{{-1, -1}, {0, -1}, {0, 0}, {0, 1}});
+        defaultPiece(new Integer[][]{{0, 0}, {0, 0}, {0, 0}, {0, 0}},new Color(0,0,0)),
+        zPiece(new Integer[][]{{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},new Color(255,0,127)),
+        linePiece(new Integer[][]{{0, -1}, {0, 0}, {0, 1}, {0, 2}},new Color(153,0,0)),
+        tPiece(new Integer[][]{{-1, 0}, {0, 0}, {1, 0}, {0, 1}},new Color(178,102,255)),
+        squarePiece(new Integer[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}},new Color(255,0,255)),
+        lPiece(new Integer[][]{{-1, -1}, {0, -1}, {0, 0}, {0, 1}},new Color(51,51,255));
 
 
 
         public Integer[][]coordonates; //choose the coordonates from enum
+        public Color color;
 
-        private Piece(Integer [][]coordonates)
+        private Piece(Integer [][]coordonates, Color color)
         {
             this.coordonates=coordonates;
+            this.color=color;
         }
     }
 

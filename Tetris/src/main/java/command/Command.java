@@ -16,6 +16,7 @@ public class Command
     private final static String DELETE = "DELETE";
     private final static String POINTS = "POINTS";
     private final static String GETPOINTS= "GETPOINTS";
+    private final static String TOP="TOP";
 
     public static String parse(String request)
     {
@@ -33,6 +34,7 @@ public class Command
                     case DELETE -> DeleteCommand.parseDelete(words);
                     case POINTS -> PointsCommand.parsePoints(words);
                     case GETPOINTS -> GetHighScoreCommand.parseHigh(words);
+                    case TOP -> TopCommand.getTop();
                     default -> UNKNOWN_REQUEST;
                 };
     }

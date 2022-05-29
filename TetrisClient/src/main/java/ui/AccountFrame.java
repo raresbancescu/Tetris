@@ -12,6 +12,8 @@ public class AccountFrame extends JFrame
     private JButton resetPassword;
     private JButton delete;
     private JPanel panel;
+    private JButton doneButton;
+    private JButton topButton;
 
     public AccountFrame(String name)
     {
@@ -23,7 +25,7 @@ public class AccountFrame extends JFrame
 
         play.addActionListener(e ->
         {
-            // TODO switch to the tetris frame
+
             String request = "getpoints " + Client.getUsername();
             Client.send(request);
             String response = Client.receive();
@@ -31,6 +33,17 @@ public class AccountFrame extends JFrame
             Tetris tetris=new Tetris(response);
             tetris.setVisible(true);
             this.setVisible(false);
+        });
+
+        topButton.addActionListener(e->{
+            String request="top";
+            Client.send(request);
+            Client.receive();
+        });
+
+        doneButton.addActionListener(e->
+        {
+            System.exit(0);
         });
 
         resetPassword.addActionListener(e ->

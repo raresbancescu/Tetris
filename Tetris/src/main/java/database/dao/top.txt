@@ -1,0 +1,5 @@
+test11 7100
+mouse 1000
+Rares0202 700
+test10 476
+Rares 32

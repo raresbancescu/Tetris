@@ -2,7 +2,7 @@ package Tetris;
 
 import client.Client;
 import ui.AccountFrame;
-import ui.util.UIUtil;
+import ui.RegisterFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.Time;
-
-import static java.lang.System.exit;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Board extends JPanel implements ActionListener {
 
@@ -26,7 +25,7 @@ public class Board extends JPanel implements ActionListener {
     private Integer currentX = 0;
     private Integer currentY = 0;
     private JLabel printScore=new JLabel("0");
-
+    private Integer gameOver=0;
     // shapes
     private Shape currentPiece;
     private Shape.Piece[] boardPieces;
@@ -40,6 +39,7 @@ public class Board extends JPanel implements ActionListener {
         time = new Timer(300, this);
         addKeyListener();
         clearBoard();
+
     }
 
     private void addKeyListener() {
@@ -120,12 +120,13 @@ public class Board extends JPanel implements ActionListener {
 
 
 
-        if (fallingPiece) {
+        if (fallingPiece ) {
 
             fallingPiece = false;
             newPiece();
 
         } else {
+            if (gameOver!=1)
             dropSlow();
         }
     }
@@ -143,23 +144,30 @@ public class Board extends JPanel implements ActionListener {
             String request = "points " + Client.getUsername() + " " + score;
             Client.send(request);
             Client.receive();
-            String response= Client.receive();
             score=0;
-
-
+            JFrame frame = new AccountFrame("Tetris");
+            frame.setVisible(true);
+            gameOver=1;
         }
     }
 
     public void drawSquare(Graphics g, Integer x, Integer y, Shape.Piece piece) {
-        g.setColor(Color.blue);
-        g.fillRect(x + 1, y + 1, sqWidth(), sqHeight());
+
+        g.setColor(piece.color);
+
+        g.fillRect(x + 1, y + 1, sqWidth()-2, sqHeight()-2);
+        g.setColor(Color.BLACK);
+        g.drawLine(x, y + sqHeight() - 1, x, y);
+        g.drawLine(x, y, x + sqWidth() - 1, y);
+        g.setColor(Color.BLACK);
+        g.drawLine(x + 1, y + sqHeight() - 1, x + sqWidth() - 1, y + sqHeight() - 1);
+        g.drawLine(x + sqWidth() - 1, y + sqHeight() - 1, x + sqWidth() - 1, y + 1);
 
     }
 
     public void paint(Graphics g) {
         super.paint(g);
-
-
+        setBackground(new Color(255,209,204));
         Integer top = (int) getSize().getWidth() - b_width * sqHeight();
 
         for (int i = 0; i < b_height; i++) {
@@ -179,6 +187,7 @@ public class Board extends JPanel implements ActionListener {
                 drawSquare(g, x * sqWidth(), top + (b_height - y - 1) * sqHeight(), currentPiece.getShape());
             }
         }
+
     }
 
     public void start() {
@@ -233,7 +242,7 @@ public class Board extends JPanel implements ActionListener {
 
             if (numberOfLines > 0) {
                 score += numberOfLines*100;
-                printScore.setText("Score : " + String.valueOf(score));
+                printScore.setText("Score : " + score);
                 fallingPiece = true;
                 currentPiece.setShape(Shape.Piece.defaultPiece);
                 repaint();
