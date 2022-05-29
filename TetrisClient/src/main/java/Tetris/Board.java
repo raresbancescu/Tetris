@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board extends JPanel implements ActionListener {
-
     // for board
     private Integer b_width = 10;
     private Integer b_height = 22;
@@ -39,18 +38,18 @@ public class Board extends JPanel implements ActionListener {
         time = new Timer(300, this);
         addKeyListener();
         clearBoard();
-
     }
 
     private void addKeyListener() {
         this.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyTyped(KeyEvent e)
+            {
 
             }
-
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(KeyEvent e)
+            {
                 Integer key=e.getKeyCode();
                 System.out.println(key);
                 if (key.equals(KeyEvent.VK_LEFT))
@@ -74,9 +73,7 @@ public class Board extends JPanel implements ActionListener {
                 {
                     dropFull();
                 }
-
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
 
@@ -117,9 +114,6 @@ public class Board extends JPanel implements ActionListener {
 
 
     public void actionPerformed(ActionEvent ev) {
-
-
-
         if (fallingPiece ) {
 
             fallingPiece = false;
@@ -152,7 +146,6 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void drawSquare(Graphics g, Integer x, Integer y, Shape.Piece piece) {
-
         g.setColor(piece.color);
 
         g.fillRect(x + 1, y + 1, sqWidth()-2, sqHeight()-2);
@@ -187,7 +180,6 @@ public class Board extends JPanel implements ActionListener {
                 drawSquare(g, x * sqWidth(), top + (b_height - y - 1) * sqHeight(), currentPiece.getShape());
             }
         }
-
     }
 
     public void start() {
@@ -197,7 +189,6 @@ public class Board extends JPanel implements ActionListener {
         clearBoard();
         newPiece();
         time.start();
-
     }
 
     private Boolean canMove(Shape newPiece, Integer nX, Integer nY) {

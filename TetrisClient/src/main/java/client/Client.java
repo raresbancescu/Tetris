@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-
+/**
+ * Class used to communicate with the server
+ */
 public class Client
 {
     private static final String LOCALHOST = "127.0.0.1";
@@ -23,6 +25,9 @@ public class Client
 
     }
 
+    /**
+     * Establishes the connection to the server
+     */
     public static void start()
     {
         try
@@ -37,11 +42,19 @@ public class Client
         }
     }
 
+    /**
+     * Sends a request to the server
+     * @param request the request message
+     */
     public static void send(String request)
     {
         out.println(request);
     }
 
+    /**
+     * Reads the response from the server
+     * @return the response from the server
+     */
     public static String receive()
     {
         String response = "";

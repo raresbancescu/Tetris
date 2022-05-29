@@ -25,18 +25,17 @@ public class AccountFrame extends JFrame
 
         play.addActionListener(e ->
         {
-
             String request = "getpoints " + Client.getUsername();
             Client.send(request);
             String response = Client.receive();
-            System.out.println("puncte: " + response);
+            System.out.println("Points: " + response);
             Tetris tetris=new Tetris(response);
             tetris.setVisible(true);
             this.setVisible(false);
         });
 
-        topButton.addActionListener(e->{
-            String request="top";
+        topButton.addActionListener(e -> {
+            String request = "top";
             Client.send(request);
             Client.receive();
         });

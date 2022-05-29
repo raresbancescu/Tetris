@@ -4,9 +4,6 @@ import client.Client;
 import ui.util.UIUtil;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class DeleteAccountFrame extends JFrame
 {
